@@ -26,13 +26,13 @@ public class DemoEnsetStudentsApplication {
     CommandLineRunner commandLineRunner(StudentRepository studentRepository, PaymentRepository paymentRepository){
         return args -> {
             studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
-                    .code("112233").firstName("Mohamed").programId("GLSID").build());
+                    .code("112233").firstName("Mohamed").lastName("Zara").programId("GLSID").build());
             studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
-                    .code("112244").firstName("Imane").programId("GLSID").build());
+                    .code("112244").firstName("Imane").lastName("Loza").programId("GLSID").build());
             studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
-                    .code("112255").firstName("Aymane").programId("BDCC").build());
+                    .code("112255").firstName("Aymane").lastName("Adil").programId("BDCC").build());
             studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
-                    .code("112266").firstName("Lobna").programId("BDCC").build());
+                    .code("112266").firstName("Lobna").lastName("Miftah").programId("BDCC").build());
 
             PaymentType[] paymentTypes = PaymentType.values();
             Random random=new Random();

@@ -1,5 +1,6 @@
 package net.youssfi.demoensetstudents.web;
 
+import net.youssfi.demoensetstudents.dtos.PaymentDto;
 import net.youssfi.demoensetstudents.entities.Payment;
 import net.youssfi.demoensetstudents.entities.PaymentStatus;
 import net.youssfi.demoensetstudents.entities.PaymentType;
@@ -68,9 +69,9 @@ public class StudentRestController {
         return paymentService.updatePaymentStatus(status,paymentId);
     }
     @PostMapping(path="/payments", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Payment savePayment(@RequestParam MultipartFile file, double amount, PaymentType type,
-                               LocalDate date, String studentCode) throws IOException {
-        return paymentService.savePayment(file,amount,type,date,studentCode);
+    public Payment savePayment(@RequestParam(name = "file") MultipartFile file,
+                               PaymentDto paymentDto) throws IOException {
+        return paymentService.savePayment(file,paymentDto);
 
     }
 

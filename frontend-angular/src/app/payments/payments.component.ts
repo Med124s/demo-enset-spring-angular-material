@@ -3,9 +3,10 @@ import {HttpClient} from "@angular/common/http";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {PaymentService} from "../services/payment.service";
 
 @Component({
-  selector: 'app-payments',
+  selector: 'app-payment',
   templateUrl: './payments.component.html',
   styleUrl: './payments.component.css'
 })
@@ -16,10 +17,10 @@ export class PaymentsComponent implements OnInit, AfterViewInit{
 
   @ViewChild(MatPaginator) paginator! : MatPaginator;
   @ViewChild(MatSort) sort! : MatSort;
- constructor(private http : HttpClient) {
+ constructor(private paymentService : PaymentService) {
  }
  ngOnInit() {
-   this.http.get("http://localhost:8021/payments")
+   this.paymentService.getPayments()
      .subscribe({
        next : value => {
          this.payments = value;

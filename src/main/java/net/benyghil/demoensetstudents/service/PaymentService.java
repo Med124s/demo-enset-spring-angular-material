@@ -1,5 +1,6 @@
 package net.youssfi.demoensetstudents.service;
 
+import net.youssfi.demoensetstudents.dtos.PaymentDto;
 import net.youssfi.demoensetstudents.entities.Payment;
 import net.youssfi.demoensetstudents.entities.PaymentStatus;
 import net.youssfi.demoensetstudents.entities.PaymentType;
@@ -32,22 +33,21 @@ public class PaymentService {
         this.studentRepository = studentRepository;
     }
 
-    public Payment savePayment(MultipartFile file, double amount, PaymentType type,
-                               LocalDate date, String studentCode) throws IOException {
-        Path folderPath = Paths.get(System.getProperty("user.home"),"enset-students","payments");
+    public Payment savePayment(MultipartFile file,PaymentDto paymentDto) throws IOException {
+        Path folderPath = Paths.get(System.getProperty("user.home"),"enset-student","payment");
         if(!Files.exists(folderPath)){
             Files.createDirectories(folderPath);
         }
         String fileName = UUID.randomUUID().toString();
-        Path filePath = Paths.get(System.getProperty("user.home"),"enset-students","payments",fileName+".pdf");
+        Path filePath = Paths.get(System.getProperty("user.home"),"enset-student","payment",fileName+".pdf");
         Files.copy(file.getInputStream(), filePath);
-        Student student = studentRepository.findByCode(studentCode);
+        Student student = studentRepository.findByCode(paymentDto.getStudentCode());
         Payment payment=Payment.builder()
-                .type(type)
+                .type(paymentDto.getType())
                 .status(PaymentStatus.CREATED)
-                .date(date)
+                .date(paymentDto.getDate())
                 .student(student)
-                .amount(amount)
+                .amount(paymentDto.getAmount())
                 .file(filePath.toUri().toString())
                 .build();
         return paymentRepository.save(payment);
