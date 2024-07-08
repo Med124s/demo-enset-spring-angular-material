@@ -1,7 +1,7 @@
 <h1>Activité Pratique Spring-Angular Material: Gestion Payments Des Etudiants</h1>
 
-<h3>Swagger: Tester Api</h3>
-<img src="captures/list-students.PNG">
+<h3>Swagger: Swagger Api</h3>
+<img src="/captures/SwaggerApi.PNG">
 <br>
 
 <h3>Login</h3>
